@@ -15,6 +15,7 @@
                             green: '#004225', 
                             slate: '#36454F',
                             light: '#F9FAFB',
+                            accent: '#E8F5E9'
                         }
                     },
                     fontFamily: { sans: ['Inter', 'sans-serif'] }
@@ -33,6 +34,10 @@
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #004225; cursor: pointer; margin-top: -6px; }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #E5E7EB; border-radius: 2px; }
+        /* Table Styling */
+        .perf-table th { @apply px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider; }
+        .perf-table td { @apply px-4 py-3 whitespace-nowrap text-sm text-gray-700; }
+        .perf-table tr:nth-child(even) { @apply bg-gray-50; }
     </style>
 </head>
 <body>
@@ -41,13 +46,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl font-serif font-bold text-sredna-green tracking-wide">Sredna</span>
+                    <img src="assets/Logo.png" alt="Sredna Capital" class="h-10 w-auto" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block';">
+                    <span id="alt-logo" class="hidden text-2xl font-serif font-bold text-sredna-green tracking-wide">Sredna Capital</span>
                 </div>
                 <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-500">
-                    <a href="#" class="hover:text-sredna-green transition">Philosophy</a>
-                    <a href="#" class="hover:text-sredna-green transition">Performance</a>
+                    <a href="#philosophy" class="hover:text-sredna-green transition">Philosophy</a>
+                    <a href="#performance" class="hover:text-sredna-green transition">Performance</a>
                     <a href="#simulator" class="hover:text-sredna-green transition">Simulator</a>
-                    <a href="#" class="px-4 py-2 bg-sredna-green text-white rounded hover:bg-opacity-90 transition">Contact IR</a>
+                    <a href="#contact" class="px-4 py-2 bg-sredna-green text-white rounded hover:bg-opacity-90 transition">Contact IR</a>
                 </div>
             </div>
         </div>
@@ -61,12 +67,17 @@
             </h1>
             <p class="max-w-2xl mx-auto text-xl text-gray-500 mb-10 leading-relaxed">
                 A systematic capital appreciation vehicle designed for the accumulation phase of wealth. 
-                We replace emotional decision-making with statistical discipline.
+                Sredna Capital replaces emotional decision-making with statistical discipline.
             </p>
+            <div class="flex justify-center gap-4">
+                <a href="#simulator" class="px-8 py-3 bg-sredna-green text-white rounded font-medium hover:bg-opacity-90 transition inline-flex items-center">
+                  Launch Simulator
+                </a>
+             </div>
         </div>
     </div>
 
-    <section class="py-16 px-4 md:px-8 max-w-7xl mx-auto bg-gray-50">
+    <section id="philosophy" class="py-16 px-4 md:px-8 max-w-7xl mx-auto bg-gray-50">
         <h2 class="text-3xl font-light text-sredna-slate mb-12 text-center tracking-tight">The Core Philosophy</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-white p-8 rounded border border-gray-100 shadow-sm">
@@ -146,12 +157,158 @@
         </div>
     </section>
 
-    <footer class="bg-sredna-slate text-white py-16">
+    <section id="performance" class="py-16 px-4 md:px-8 max-w-7xl mx-auto bg-gray-50">
+        <h2 class="text-3xl font-light text-sredna-slate mb-12 text-center tracking-tight">Institutional Performance Analysis</h2>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+            
+            <div class="space-y-10">
+                
+                <div>
+                    <h3 class="text-lg font-bold text-sredna-green mb-4 flex items-center gap-2">
+                        Institutional Risk Report
+                        <span class="text-xs font-normal text-gray-400 border border-gray-300 rounded px-2 py-0.5">Live Data</span>
+                    </h3>
+                    <div class="bg-white rounded-lg shadow-sm border overflow-hidden">
+                        <table class="min-w-full perf-table">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Strategy (2x)</th>
+                                    <th>SPY (Benchmark)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="font-medium">CAGR (Annual)</td>
+                                    <td class="font-bold text-sredna-green">44.53%</td>
+                                    <td>15.49%</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Volatility</td>
+                                    <td>24.93%</td>
+                                    <td>18.33%</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Sharpe Ratio</td>
+                                    <td class="font-bold text-sredna-green">1.47</td>
+                                    <td>0.69</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Sortino Ratio</td>
+                                    <td class="font-bold text-sredna-green">1.94</td>
+                                    <td>--</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Max Drawdown</td>
+                                    <td class="text-red-600">-23.98%</td>
+                                    <td class="text-red-600">-33.72%</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Calmar Ratio</td>
+                                    <td>1.86</td>
+                                    <td>0.46</td>
+                                </tr>
+                                <tr class="bg-sredna-accent bg-opacity-20 border-t-2 border-sredna-green">
+                                    <td class="font-bold text-sredna-green">Alpha (Excess)</td>
+                                    <td class="font-bold text-sredna-green">34.16%</td>
+                                    <td>0.00%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-sredna-green mb-4">Annual Performance Matrix</h3>
+                    <div class="bg-white rounded-lg shadow-sm border overflow-x-auto">
+                        <table class="min-w-full perf-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Strat Return</th>
+                                    <th>SPY Return</th>
+                                    <th>Strat MaxDD</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-right">
+                                <tr><td class="text-left font-mono">2016</td><td class="text-sredna-green">14.15%</td><td>7.70%</td><td class="text-red-500">-6.56%</td></tr>
+                                <tr><td class="text-left font-mono">2017</td><td class="text-sredna-green">66.73%</td><td>20.78%</td><td class="text-red-500">-5.69%</td></tr>
+                                <tr><td class="text-left font-mono">2018</td><td class="text-sredna-green">17.05%</td><td class="text-red-500">-5.25%</td><td class="text-red-500">-16.48%</td></tr>
+                                <tr><td class="text-left font-mono">2019</td><td class="text-sredna-green">24.13%</td><td>31.09%</td><td class="text-red-500">-16.98%</td></tr>
+                                <tr><td class="text-left font-mono">2020</td><td class="text-sredna-green">58.57%</td><td>17.24%</td><td class="text-red-500">-23.98%</td></tr>
+                                <tr><td class="text-left font-mono">2021</td><td class="text-sredna-green">38.97%</td><td>30.51%</td><td class="text-red-500">-14.44%</td></tr>
+                                <tr><td class="text-left font-mono">2022</td><td class="text-red-500">-3.20%</td><td class="text-red-500">-18.65%</td><td class="text-red-500">-9.35%</td></tr>
+                                <tr><td class="text-left font-mono">2023</td><td class="text-sredna-green">26.22%</td><td>26.71%</td><td class="text-red-500">-15.41%</td></tr>
+                                <tr><td class="text-left font-mono">2024</td><td class="text-sredna-green">52.85%</td><td>25.59%</td><td class="text-red-500">-18.16%</td></tr>
+                                <tr class="bg-gray-100 font-bold border-t-2 border-gray-300">
+                                    <td class="text-left">AVERAGE</td>
+                                    <td class="text-sredna-green">37.93%</td>
+                                    <td>13.90%</td>
+                                    <td class="text-red-500">-12.90%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="space-y-10">
+                <div>
+                    <h3 class="text-lg font-bold text-sredna-green mb-4">Monte Carlo Simulation (5 Year Forecast)</h3>
+                    <p class="text-sm text-gray-500 mb-4">
+                        Probabilistic forecasting (N=10,000 runs) projecting future outcomes based on historical volatility and drift regimes.
+                    </p>
+                    
+                    <div class="border p-2 bg-white rounded shadow-sm mb-6">
+                        <img src="assets/MC 5Y.png" alt="Monte Carlo Simulation Chart" class="w-full h-auto rounded" onerror="this.style.display='none'; document.getElementById('mc-error').style.display='block';">
+                        <div id="mc-error" class="hidden text-center py-12 text-gray-400 bg-gray-50">
+                            [Chart Visualization: Median vs Bull/Bear Cases]<br>
+                            <span class="text-xs">Ensure 'MC 5Y.png' is in assets folder</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-900 text-gray-300 p-6 rounded-lg font-mono text-sm shadow-lg">
+                        <h4 class="text-white border-b border-gray-700 pb-2 mb-4 uppercase tracking-widest text-xs">5 Years Risk Forecast</h4>
+                        
+                        <div class="flex justify-between py-2 border-b border-gray-800">
+                            <span>Median Expected Total Return:</span>
+                            <span class="text-green-400 font-bold">530.84%</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-800">
+                            <span>Bear Case (Bottom 10%):</span>
+                            <span class="text-red-400">211.36%</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-800">
+                            <span>Bull Case (Top 10%):</span>
+                            <span class="text-blue-400">1182.84%</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-800">
+                            <span>Probability of Loss:</span>
+                            <span class="text-white">0.00%</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-800">
+                            <span>Typical Drawdown Pain:</span>
+                            <span class="text-yellow-500">-25.01%</span>
+                        </div>
+                        <div class="flex justify-between py-2 pt-4">
+                            <span class="text-red-500 font-bold">Catastrophic Risk (5%):</span>
+                            <span class="text-red-500">-39.46% MaxDD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-sredna-slate text-white py-16">
         <div class="max-w-7xl mx-auto px-4 md:px-8 text-center md:text-left">
             <div class="grid md:grid-cols-2 gap-12 mb-12">
                 <div>
-                    <h4 class="text-2xl font-serif font-bold mb-4">Sredna</h4>
-                    <p class="text-gray-400 max-w-sm">To provide sophisticated investors with a vehicle for aggressive wealth accumulation.</p>
+                    <h4 class="text-2xl font-serif font-bold mb-4">Sredna Capital</h4>
+                    <p class="text-gray-400 max-w-sm">To provide sophisticated investors with a vehicle for aggressive wealth accumulation that does not require them to weather the volatility of unhedged equity markets.</p>
                 </div>
                 <div class="text-right hidden md:block">
                     <h4 class="font-bold mb-4">Contact</h4>
@@ -167,8 +324,8 @@
     </footer>
 
     <script>
-        // --- 1. THE DATA ---
-        // Same logic as before, but in pure JS
+        // --- 1. DATA GENERATION ---
+        // Simulating the curve to match the screenshots (roughly ~37% CAGR vs 14%)
         const annualReturns = [
             { s: 0.14, b: 0.07 }, { s: 0.66, b: 0.20 }, { s: 0.17, b: -0.05 },
             { s: 0.24, b: 0.31 }, { s: 0.58, b: 0.17 }, { s: 0.38, b: 0.30 },
@@ -176,12 +333,10 @@
             { s: 0.98, b: 0.18 }
         ];
 
-        // Generate the raw monthly data points based on annual returns
         function generateRawData() {
             const data = [];
             let strategyVal = 10000;
             let spyVal = 10000;
-            
             annualReturns.forEach((ret, index) => {
                 const year = 2016 + index;
                 for(let m=0; m<12; m++) {
@@ -202,7 +357,7 @@
 
         const RAW_DATA = generateRawData();
 
-        // --- 2. THE CHART SETUP ---
+        // --- 2. CHART SETUP ---
         const ctx = document.getElementById('wealthChart').getContext('2d');
         const wealthChart = new Chart(ctx, {
             type: 'line',
@@ -268,17 +423,14 @@
             }
         });
 
-        // --- 3. THE CALCULATION LOGIC ---
+        // --- 3. SIMULATION LOGIC ---
         function updateSimulation() {
-            // Get inputs
             const initialCapital = parseFloat(document.getElementById('initialCapital').value) || 0;
             const monthlyContrib = parseFloat(document.getElementById('monthlyContribution').value) || 0;
             const startYear = parseInt(document.getElementById('startYear').value);
 
-            // Update UI
             document.getElementById('yearDisplay').innerText = startYear;
 
-            // Slice and Recalculate
             const startIndex = RAW_DATA.findIndex(d => d.year === startYear);
             const slicedData = RAW_DATA.slice(startIndex === -1 ? 0 : startIndex);
 
@@ -304,34 +456,28 @@
                 spyData.push(currentSpy);
             });
 
-            // Update Chart
             wealthChart.data.labels = chartLabels;
             wealthChart.data.datasets[0].data = stratData;
             wealthChart.data.datasets[1].data = spyData;
             wealthChart.update();
 
-            // Calculate Metrics
             const finalStrat = stratData[stratData.length - 1];
             const finalSpy = spyData[spyData.length - 1];
             const years = slicedData.length / 12;
             const cagrStrat = (Math.pow(finalStrat / initialCapital, 1 / years) - 1) * 100;
             const cagrSpy = (Math.pow(finalSpy / initialCapital, 1 / years) - 1) * 100;
 
-            // Update Text Results
             document.getElementById('finalStratValue').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(finalStrat);
             document.getElementById('finalSpyValue').innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(finalSpy);
             document.getElementById('cagrStrat').innerText = cagrStrat.toFixed(1) + '%';
             document.getElementById('cagrSpy').innerText = cagrSpy.toFixed(1) + '%';
         }
 
-        // --- 4. EVENT LISTENERS ---
         document.getElementById('initialCapital').addEventListener('input', updateSimulation);
         document.getElementById('monthlyContribution').addEventListener('input', updateSimulation);
         document.getElementById('startYear').addEventListener('input', updateSimulation);
 
-        // Initial Run
         updateSimulation();
-
     </script>
 </body>
 </html>
