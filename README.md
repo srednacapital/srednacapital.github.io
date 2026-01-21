@@ -1,1 +1,1 @@
-# srednacapital.io
+# srednacapital.github.io
