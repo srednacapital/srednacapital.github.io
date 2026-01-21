@@ -1,7 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Hunter Strategy</title>
+    <style>
+        /* CSS STYLES */
+        :root {
+            --primary: #00C853;
+            --dark: #121212;
+            --card-bg: #1E1E1E;
+            --text: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HERO SECTION */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* GRID SECTION */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* BUTTON */
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: opacity 0.3s;
+        }
+
+        .cta-button:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
 <body>
-    <h1>Welcome to my new website!</h1>
-    <p>This site is hosted on GitHub Pages.</p>
+
+    <header>
+        <h1>Alpha <span class="highlight">Hunter</span></h1>
+        <p class="subtitle">An institutional-grade systematic trading strategy optimizing for V-shaped recoveries while insuring against catastrophic risk.</p>
+        <a href="#" class="cta-button">View Live Signals</a>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>Total Return</h3>
+                <div class="stat-number">2,540%</div>
+                <p>Significantly outperforming the S&P 500 benchmark over the last 10-year period.</p>
+            </div>
+            <div class="card">
+                <h3>Smart Leverage</h3>
+                <div class="stat-number">2x</div>
+                <p>Dynamic core leverage that activates only during high-probability Bull Regimes.</p>
+            </div>
+            <div class="card">
+                <h3>Crash Brake</h3>
+                <div class="stat-number">-5%</div>
+                <p>Automatic safety valve triggers if the market drops >5% in 3 days, moving assets to cash.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Alpha Hunter Systems. Built with AI.
+    </footer>
+
 </body>
 </html>
