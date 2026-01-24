@@ -281,15 +281,55 @@
         </section>
     </div>
 
-    <div id="documents-content" class="hidden">
+<div id="documents-content" class="hidden">
         <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto min-h-[60vh]">
             <h2 class="text-3xl font-light text-sredna-slate mb-8 text-center tracking-tight">
                 <span class="lang-en">Investor Documents</span><span class="lang-bg">Документи за Инвеститори</span>
             </h2>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                <p class="text-lg mb-2"><span class="lang-en">Secure Document Portal</span><span class="lang-bg">Портал за Сигурни Документи</span></p>
-                <p class="text-sm"><span class="lang-en">No documents are currently available for public download.</span><span class="lang-bg">В момента няма налични документи за публично изтегляне.</span></p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                
+                <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-red-50 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-mono text-gray-400 bg-gray-50 px-2 py-1 rounded">PDF</span>
+                    </div>
+                    
+                    <h3 class="text-lg font-bold text-sredna-slate mb-1">
+                        <span class="lang-en">First Letter</span>
+                        <span class="lang-bg">Първо Писмо</span>
+                    </h3>
+                    <p class="text-sm text-gray-400 mb-6">
+                        <span class="lang-en">Published: Jan 24, 2026</span>
+                        <span class="lang-bg">Публикувано: 24 Яну 2026</span>
+                    </p>
+                    
+                    <a href="First Letter.pdf" target="_blank" class="flex items-center text-sm font-bold text-sredna group-hover:underline">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span class="lang-en">Download Report</span><span class="lang-bg">Изтегли Доклада</span>
+                    </a>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl border border-dashed border-gray-300 p-6 flex flex-col justify-center items-center text-center opacity-75">
+                    <div class="p-3 bg-gray-100 rounded-lg mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-bold text-gray-400 mb-1">
+                        <span class="lang-en">Q1 2026 Report</span><span class="lang-bg">Доклад Q1 2026</span>
+                    </h3>
+                    <p class="text-xs text-gray-400">
+                        <span class="lang-en">Coming April 2026</span><span class="lang-bg">Очаквайте Април 2026</span>
+                    </p>
+                </div>
+
             </div>
         </section>
     </div>
