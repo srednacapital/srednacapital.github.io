@@ -1,0 +1,20 @@
+# ============================================================
+#  PRIVATE — never publish. The public site serves ONLY the
+#  marketing page, the ENCRYPTED dashboard, and static assets.
+# ============================================================
+
+# Live data & secrets (positions, NAV, API keys)
+portfolio.json
+.dashboard.plain.html
+engine/etoro_config.json
+
+# Strategy engine + build tooling — the alpha. Local only.
+engine/
+build_dashboard.py
+dashboard.src.html
+update.bat
+README_SREDNA.md
+
+# Python cruft
+__pycache__/
+*.pyc

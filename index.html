@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sredna Capital</title>
+    <link rel="icon" type="image/png" href="Logo3.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { sredna: { DEFAULT:'#004225', slate:'#36454F', light:'#F9FAFB', accent:'#E8F5E9', border:'#00422520' } },
+                fontFamily: { sans:['Inter','sans-serif'] },
+                boxShadow: { 'card':'0 4px 6px -1px rgba(0,66,37,0.05), 0 2px 4px -1px rgba(0,66,37,0.03)' }
+            } }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family:'Inter',sans-serif; background-color:#F9FAFB; color:#36454F; }
+        .font-mono { font-family:'Roboto Mono',monospace; }
+        .lang-bg { display:none; }
+        body.show-bg .lang-en { display:none !important; }
+        body.show-bg .lang-bg { display:inline !important; }
+        .nav-link.active { color:#004225; font-weight:700; border-bottom:2px solid #004225; }
+        input[type=range] { -webkit-appearance:none; width:100%; background:transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; height:16px; width:16px; border-radius:50%; background:#004225; cursor:pointer; margin-top:-6px; box-shadow:0 0 0 4px #E8F5E9; }
+        input[type=range]::-webkit-slider-runnable-track { width:100%; height:4px; cursor:pointer; background:#E5E7EB; border-radius:2px; }
+        .clean-card { background:#fff; border-radius:.75rem; box-shadow:0 1px 2px rgba(0,0,0,.05); border:1px solid #E5E7EB; overflow:hidden; height:100%; display:flex; flex-direction:column; }
+        .clean-card-header { display:flex; align-items:center; gap:.75rem; padding:1rem 1.5rem; border-bottom:1px solid #F3F4F6; font-weight:700; color:#36454F; text-transform:uppercase; letter-spacing:.05em; font-size:.75rem; background:rgba(249,250,251,.5); }
+        .clean-card-body { padding:1.5rem; font-size:.875rem; flex-grow:1; }
+        .metric-table { width:100%; } .metric-table td { padding:1rem 0; border-bottom:1px solid #F9FAFB; vertical-align:middle; }
+        .metric-table tr:last-child td { border-bottom:none; }
+        .metric-label { color:#4B5563; font-weight:500; } .metric-value { font-weight:700; color:#36454F; text-align:right; }
+        .perf-table { width:100%; }
+        .perf-table th { text-align:center; font-size:.7rem; font-weight:600; color:#36454F; text-transform:uppercase; letter-spacing:.05em; padding:.75rem 1rem; border-bottom:1px solid #F3F4F6; background:#F9FAFB; }
+        .perf-table td { text-align:center; padding:.5rem 1rem; font-size:.875rem; border-bottom:1px solid #F9FAFB; }
+        .badge-bt { display:inline-block; font-size:.62rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#8a6d1a; background:#FEF6E0; border:1px solid #F5E4B3; padding:.15rem .5rem; border-radius:9999px; }
+    </style>
+</head>
+<body class="show-en">
+
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('home')">
+                    <img src="Logo.png" alt="Sredna Capital" class="h-12 w-auto" onerror="this.style.display='none'; document.getElementById('alt-logo').style.display='block';">
+                    <span id="alt-logo" class="hidden text-2xl font-serif font-bold text-sredna tracking-wide">Sredna Capital</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-500 h-20 items-center">
+                        <button onclick="switchPage('home')" class="hover:text-sredna transition nav-link active h-full flex items-center" id="nav-home"><span class="lang-en">Home</span><span class="lang-bg">Начало</span></button>
+                        <button onclick="switchPage('documents')" class="hover:text-sredna transition nav-link h-full flex items-center" id="nav-docs"><span class="lang-en">Documents</span><span class="lang-bg">Документи</span></button>
+                        <a href="#contact" class="px-4 py-2 bg-sredna text-white rounded-md hover:bg-opacity-90 transition shadow-sm"><span class="lang-en">Contact IR</span><span class="lang-bg">Връзка с нас</span></a>
+                        <a href="dashboard.html" class="px-4 py-2 border border-sredna text-sredna rounded-md hover:bg-sredna hover:text-white transition"><span class="lang-en">Employee Login</span><span class="lang-bg">Вход за Служители</span></a>
+                    </div>
+                    <div class="flex items-center border rounded-md overflow-hidden text-xs font-bold">
+                        <button onclick="setLanguage('en')" class="px-3 py-1.5 transition bg-sredna text-white" id="btn-en">EN</button>
+                        <button onclick="setLanguage('bg')" class="px-3 py-1.5 transition bg-white text-gray-600 hover:bg-gray-50" id="btn-bg">BG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 py-24 md:py-32 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-light tracking-tight text-sredna mb-6">
+                <span class="lang-en">Asymmetric Returns.<br/><span class="font-semibold">Mathematical Precision.</span></span>
+                <span class="lang-bg">Асиметрична Възвръщаемост.<br/><span class="font-semibold">Математическа Прецизност.</span></span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-xl text-gray-500 mb-10 leading-relaxed">
+                <span class="lang-en">A systematic capital appreciation vehicle designed for the accumulation phase of wealth. Sredna Capital replaces emotional decision-making with statistical discipline.</span>
+                <span class="lang-bg">Систематичен инструмент за натрупване на капитал, предназначен за фазата на растеж на богатството. Sredna Capital заменя емоционалните решения със статистическа дисциплина.</span>
+            </p>
+        </div>
+    </div>
+
+    <section id="philosophy" class="py-20 px-4 md:px-8 max-w-7xl mx-auto bg-sredna-light border-t border-b border-gray-200">
+        <h2 class="text-3xl font-light text-sredna-slate mb-12 text-center tracking-tight"><span class="lang-en">The Core Philosophy</span><span class="lang-bg">Основна Философия</span></h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden"><div class="absolute top-0 left-0 w-1 h-full bg-sredna"></div><h3 class="text-xl font-medium mb-3 text-sredna"><span class="lang-en">Regime Filtering</span><span class="lang-bg">Режимен Филтър</span></h3><p class="text-gray-500 leading-relaxed"><span class="lang-en">Markets exhibit distinct regimes. Our algorithms filter out low-probability environments, participating only in confirmed trends.</span><span class="lang-bg">Пазарите имат различни режими. Нашите алгоритми филтрират среда с ниска вероятност за печалба и участват само в потвърдени трендове.</span></p></div>
+            <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden"><div class="absolute top-0 left-0 w-1 h-full bg-sredna"></div><h3 class="text-xl font-medium mb-3 text-sredna"><span class="lang-en">Dynamic Exposure</span><span class="lang-bg">Динамична Експозиция</span></h3><p class="text-gray-500 leading-relaxed"><span class="lang-en">When market health metrics are optimal, the strategy intelligently amplifies exposure to high-conviction trends.</span><span class="lang-bg">Когато пазарните показатели са оптимални, стратегията интелигентно увеличава експозицията към трендове с висока убедителност.</span></p></div>
+            <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden"><div class="absolute top-0 left-0 w-1 h-full bg-sredna"></div><h3 class="text-xl font-medium mb-3 text-sredna"><span class="lang-en">Tail-Risk Defense</span><span class="lang-bg">Защита от Сривове</span></h3><p class="text-gray-500 leading-relaxed"><span class="lang-en">We execute an immediate rotation to cash when liquidation events are detected, bypassing the 'falling knife' effect.</span><span class="lang-bg">Изпълняваме незабавна ротация към пари в брой при засичане на ликвидационни събития, избягвайки ефекта на „падащия нож“.</span></p></div>
+        </div>
+    </section>
+
+    <div id="main-content">
+        <section id="simulator" class="py-20 px-4 md:px-8 max-w-7xl mx-auto bg-white">
+            <h2 class="text-3xl font-light text-sredna-slate mb-3 text-center tracking-tight"><span class="lang-en">Interactive Wealth Simulator</span><span class="lang-bg">Интерактивен Симулатор на Богатството</span></h2>
+            <p class="text-center mb-10"><span class="badge-bt">Hypothetical backtest · 2005–2025</span></p>
+            <div class="bg-white rounded-xl shadow-card border border-sredna-border overflow-hidden flex flex-col md:flex-row">
+                <div class="w-full md:w-1/3 p-8 bg-sredna-light border-r border-sredna-border">
+                    <h3 class="text-lg font-semibold text-sredna mb-8"><span class="lang-en">Configuration</span><span class="lang-bg">Конфигурация</span></h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"><span class="lang-en">Initial Capital</span><span class="lang-bg">Начален Капитал</span></label>
+                            <div class="flex items-center bg-white border border-gray-200 rounded-md px-3 py-3 shadow-sm"><span class="text-sredna font-semibold mr-2">$</span><input type="number" id="initialCapital" value="10000" class="bg-transparent w-full outline-none font-mono text-gray-700 font-medium"></div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"><span class="lang-en">Monthly Contribution</span><span class="lang-bg">Месечна Вноска</span></label>
+                            <div class="flex items-center bg-white border border-gray-200 rounded-md px-3 py-3 shadow-sm"><span class="text-sredna font-semibold mr-2">$</span><input type="number" id="monthlyContribution" value="0" class="bg-transparent w-full outline-none font-mono text-gray-700 font-medium"></div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"><span class="lang-en">Time Horizon</span><span class="lang-bg">Времеви Хоризонт</span> (<span id="yearDisplay" class="text-sredna">2005</span> - 2025)</label>
+                            <div class="px-1"><input type="range" id="startYear" min="2005" max="2025" value="2005"></div>
+                            <div class="flex justify-between text-[10px] text-gray-400 mt-2 font-mono"><span>2005</span><span>'10</span><span>'15</span><span>'20</span><span>2025</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-card border border-sredna-border mt-8 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-sredna"></div>
+                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1"><span class="lang-en">Projected Total Wealth</span><span class="lang-bg">Прогнозирано Богатство</span></h4>
+                        <div class="text-3xl font-bold text-sredna font-mono tracking-tight" id="finalStratValue">$0</div>
+                        <div class="text-sm text-gray-500 font-medium mt-1">Benchmark: <span id="finalSpyValue">$0</span></div>
+                        <div class="mt-6 grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+                            <div><span class="block text-[10px] text-gray-400 uppercase tracking-wider mb-1 leading-tight">Sredna CAGR</span><span class="text-xl font-bold text-sredna" id="cagrStrat">0%</span></div>
+                            <div><span class="block text-[10px] text-gray-400 uppercase tracking-wider mb-1 leading-tight">SPY CAGR</span><span class="text-xl font-bold text-gray-500" id="cagrSpy">0%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 p-8 flex flex-col">
+                    <div class="flex-grow relative min-h-[400px]"><canvas id="wealthChart"></canvas></div>
+                    <p class="text-xs text-gray-400 italic text-center border-t pt-4 mt-4"><span class="lang-en">*Hypothetical backtested gross returns. Not indicative of future results.</span><span class="lang-bg">*Хипотетична бектествана бруто възвръщаемост. Не гарантира бъдещи резултати.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="performance" class="py-20 px-4 md:px-8 max-w-7xl mx-auto bg-sredna-light">
+            <h2 class="text-3xl font-light text-sredna-slate mb-3 text-center tracking-tight"><span class="lang-en">Performance Analysis</span><span class="lang-bg">Анализ на Представянето</span></h2>
+            <p class="text-center mb-10"><span class="badge-bt">Hypothetical backtest · 2005–2025 · net of modelled costs</span></p>
+            <div class="space-y-12">
+                <div class="clean-card h-auto block">
+                    <div class="clean-card-header"><span class="lang-en">Annual Returns &amp; Drawdown Profile</span><span class="lang-bg">Годишна Възвръщаемост и Профил на Спада</span></div>
+                    <div class="clean-card-body">
+                        <div class="h-80 relative mb-10 w-full"><canvas id="annualPerfChart"></canvas></div>
+                        <h4 class="text-xs font-bold text-sredna-slate uppercase tracking-wider mb-4 border-b pb-2"><span class="lang-en">Max Drawdown by Year</span><span class="lang-bg">Максимален Спад по Година</span></h4>
+                        <div class="overflow-x-auto border rounded-lg">
+                            <table class="perf-table min-w-full">
+                                <thead><tr><th class="text-left pl-4"><span class="lang-en">Year</span><span class="lang-bg">Година</span></th><th class="text-right">Sredna Capital</th><th class="text-right pr-4">SPY</th></tr></thead>
+                                <tbody class="font-mono" id="ddTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+                    <div class="clean-card">
+                        <div class="clean-card-header"><span class="lang-en">Risk &amp; Return Profile</span><span class="lang-bg">Профил Риск/Възвръщаемост</span></div>
+                        <div class="clean-card-body">
+                            <table class="w-full text-sm metric-table">
+                                <thead><tr class="text-[10px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-50"><th class="text-left py-2 font-normal pb-3"><span class="lang-en">Metric</span><span class="lang-bg">Показател</span></th><th class="text-left py-2 pb-3">Sredna</th><th class="text-left py-2 pb-3">SPY</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="metric-label">CAGR</td><td class="metric-value text-gray-600">15.67%</td><td class="metric-value text-gray-600">10.94%</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Volatility</span><span class="lang-bg">Волатилност</span></td><td class="metric-value text-gray-600">10.90%</td><td class="metric-value text-gray-600">18.90%</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Sharpe Ratio</span><span class="lang-bg">Коеф. Шарп</span></td><td class="metric-value text-gray-600">1.07</td><td class="metric-value text-gray-600">0.55</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Sortino Ratio</span><span class="lang-bg">Коеф. Сортино</span></td><td class="metric-value text-gray-600">1.56</td><td class="metric-value text-gray-600">0.78</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Calmar Ratio</span><span class="lang-bg">Коеф. Калмар</span></td><td class="metric-value text-gray-600">0.73</td><td class="metric-value text-gray-600">0.20</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Max Drawdown</span><span class="lang-bg">Макс. Спад</span></td><td class="metric-value text-gray-600">-21.4%</td><td class="metric-value text-gray-600">-55.2%</td></tr>
+                                    <tr><td class="metric-label">Beta</td><td class="metric-value text-gray-600">0.31</td><td class="metric-value text-gray-600">1.00</td></tr>
+                                    <tr class="bg-sredna-accent/30"><td class="metric-label font-bold text-sredna-slate pl-2"><span class="lang-en">Annualized Alpha</span><span class="lang-bg">Годишна Алфа</span></td><td class="metric-value text-gray-600 pr-2">+4.7%</td><td class="metric-value text-gray-600 pr-2">0.00%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clean-card">
+                        <div class="clean-card-header"><span class="lang-en">Backtest Highlights</span><span class="lang-bg">Акценти от Бектеста</span></div>
+                        <div class="clean-card-body">
+                             <table class="w-full text-sm metric-table">
+                                <tbody>
+                                    <tr><td class="metric-label"><span class="lang-en">Positive Years</span><span class="lang-bg">Положителни Години</span></td><td class="metric-value text-gray-600 text-right">19 / 21 (90%)</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Best Year (2020)</span><span class="lang-bg">Най-добра Година (2020)</span></td><td class="metric-value text-gray-600 text-right">+44.8%</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Worst Year (2022)</span><span class="lang-bg">Най-лоша Година (2022)</span></td><td class="metric-value text-gray-600 text-right">-14.6%</td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Avg. Annual Max Drawdown</span><span class="lang-bg">Среден Годишен Спад</span></td><td class="metric-value text-gray-600 text-right">-7.7% <span class="text-xs text-gray-400">(SPY -14.6%)</span></td></tr>
+                                    <tr class="border-t border-gray-100"><td class="metric-label pt-4"><span class="lang-en">2008 Financial Crisis</span><span class="lang-bg">Кризата от 2008</span></td><td class="metric-value text-gray-600 text-right pt-4">-2.8% <span class="text-xs">(vs SPY -36.8%)</span></td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">2020 COVID Crash (MaxDD)</span><span class="lang-bg">COVID Срив 2020 (MaxDD)</span></td><td class="metric-value text-gray-600 text-right">-11.1% <span class="text-xs">(vs SPY -33.7%)</span></td></tr>
+                                    <tr><td class="metric-label"><span class="lang-en">Correlation to S&amp;P 500</span><span class="lang-bg">Корелация с S&amp;P 500</span></td><td class="metric-value text-gray-600 text-right">Low (β 0.31)</td></tr>
+                                </tbody>
+                             </table>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 italic text-center mt-8"><span class="lang-en">*All figures represent hypothetical backtested gross returns (2005–2025), net of modelled spread/borrow costs but before advisory fees and taxes. Backtested results have inherent limitations and do not represent actual trading. Past performance is not indicative of future results. The live track record is reported from inception on the internal dashboard.</span><span class="lang-bg">*Всички стойности представляват хипотетична бектествана бруто възвръщаемост (2005–2025), нето от моделирани разходи, но преди такси и данъци. Бектестовете имат присъщи ограничения и не представляват реална търговия. Миналите резултати не гарантират бъдещи. Реалният резултат се отчита от старта на вътрешното табло.</span></p>
+            </div>
+        </section>
+    </div>
+
+    <div id="documents-content" class="hidden">
+        <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto min-h-[60vh]">
+            <h2 class="text-3xl font-light text-sredna-slate mb-8 text-center tracking-tight"><span class="lang-en">Investor Documents</span><span class="lang-bg">Документи за Инвеститори</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow group">
+                    <div class="flex justify-between items-start mb-4"><div class="p-3 bg-red-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div><span class="text-xs font-mono text-gray-400 bg-gray-50 px-2 py-1 rounded">PDF</span></div>
+                    <h3 class="text-lg font-bold text-sredna-slate mb-1"><span class="lang-en">First Letter</span><span class="lang-bg">Първо Писмо</span></h3>
+                    <p class="text-sm text-gray-400 mb-6"><span class="lang-en">Published: Jan 24, 2026</span><span class="lang-bg">Публикувано: 24 Яну 2026</span></p>
+                    <a href="First Letter.pdf" target="_blank" class="flex items-center text-sm font-bold text-sredna group-hover:underline"><span class="lang-en">Download Report</span><span class="lang-bg">Изтегли Доклада</span></a>
+                </div>
+                <div class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow group">
+                    <div class="flex justify-between items-start mb-4"><div class="p-3 bg-red-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div><span class="text-xs font-mono text-gray-400 bg-gray-50 px-2 py-1 rounded">PDF</span></div>
+                    <h3 class="text-lg font-bold text-sredna-slate mb-1"><span class="lang-en">Update Letter - Volatile Markets</span><span class="lang-bg">Писмо за Актуализация</span></h3>
+                    <p class="text-sm text-gray-400 mb-6"><span class="lang-en">Published: Feb 03, 2026</span><span class="lang-bg">Публикувано: 03 Фев 2026</span></p>
+                    <a href="Update Letter - Volatile Markets.pdf" target="_blank" class="flex items-center text-sm font-bold text-sredna group-hover:underline"><span class="lang-en">Download Report</span><span class="lang-bg">Изтегли Доклада</span></a>
+                </div>
+                <div class="bg-gray-50 rounded-xl border border-dashed border-gray-300 p-6 flex flex-col justify-center items-center text-center opacity-75">
+                    <h3 class="text-sm font-bold text-gray-400 mb-1"><span class="lang-en">Q1 2026 Report</span><span class="lang-bg">Доклад Q1 2026</span></h3>
+                    <p class="text-xs text-gray-400"><span class="lang-en">Coming April 2026</span><span class="lang-bg">Очаквайте Април 2026</span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="bg-sredna text-white py-16" id="access-form-section">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-serif font-bold mb-4"><span class="lang-en">Private Access Application</span><span class="lang-bg">Кандидатура за Частен Достъп</span></h2>
+            <p class="text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto"><span class="lang-en">Due to the proprietary nature of our strategies and strict capacity limits, Sredna Capital accepts new partners by invitation only.</span><span class="lang-bg">Поради собствения характер на нашите стратегии и строгите ограничения, Sredna Capital приема нови партньори само с покана.</span></p>
+            <form id="accessForm" class="bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/10 shadow-lg text-left" method="POST">
+                <input type="hidden" name="_subject" value="New Private Access Application">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div><label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2"><span class="lang-en">Email Address</span><span class="lang-bg">Имейл Адрес</span></label><input type="email" name="email" required placeholder="name@company.com" class="w-full bg-white/90 text-sredna-slate px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"></div>
+                    <div><label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2"><span class="lang-en">Country of Residence</span><span class="lang-bg">Държава на Пребиваване</span></label><input type="text" name="country" required placeholder="e.g. Switzerland" class="w-full bg-white/90 text-sredna-slate px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"></div>
+                </div>
+                <div class="mb-8"><label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2"><span class="lang-en">Capital Available for Deployment ($)</span><span class="lang-bg">Капитал на Разположение ($)</span></label><input type="text" name="capital" required placeholder="$250,000" class="w-full bg-white/90 text-sredna-slate px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400 font-mono"></div>
+                <div class="text-center">
+                    <button type="submit" id="submitBtn" class="bg-white text-sredna font-bold py-3 px-8 rounded hover:bg-gray-100 transition shadow-lg transform hover:scale-105"><span class="lang-en">Request Invitation</span><span class="lang-bg">Заявете Покана</span></button>
+                    <p class="text-xs text-gray-400 mt-4"><span class="lang-en">By submitting, you acknowledge this is a preliminary inquiry and does not constitute an offer to sell securities.</span><span class="lang-bg">С изпращането потвърждавате, че това е предварително запитване и не представлява предложение за продажба на ценни книжа.</span></p>
+                </div>
+            </form>
+            <div id="successMessage" class="hidden bg-white/10 p-12 rounded-xl backdrop-blur-sm border border-green-400/30 shadow-lg text-center">
+                <h3 class="text-2xl font-bold mb-2">Application Received</h3>
+                <p class="text-gray-300">Your inquiry has been sent to our Investor Relations team. We will review your eligibility and contact you if an allocation becomes available.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-sredna-slate text-white py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 text-center md:text-left">
+            <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <h4 class="text-2xl font-serif font-bold mb-4">Sredna Capital</h4>
+                    <p class="text-gray-400 max-w-sm mx-auto md:mx-0 leading-relaxed"><span class="lang-en">To provide sophisticated investors with a vehicle for disciplined wealth accumulation that does not require weathering the full volatility of unhedged equity markets.</span><span class="lang-bg">Да предоставим на опитни инвеститори инструмент за дисциплинирано натрупване на богатство, без пълната волатилност на нехеджираните пазари.</span></p>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="font-bold mb-4 text-white uppercase tracking-wider"><span class="lang-en">Contact</span><span class="lang-bg">Контакт</span></h4>
+                    <p class="font-medium mb-1"><a href="mailto:info@srednacapital.com" class="text-gray-400 hover:text-white transition-colors duration-200 no-underline">info@srednacapital.com</a></p>
+                    <p class="text-gray-400 mb-6">Plovdiv, Bulgaria</p>
+                    <div class="flex justify-center md:justify-end gap-4">
+                        <a href="https://x.com/SrednaCM" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-200" aria-label="X"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-[11px] text-gray-500 space-y-4 text-justify leading-relaxed">
+                <p><strong><span class="lang-en">IMPORTANT DISCLAIMER:</span><span class="lang-bg">ВАЖЕН ОТКАЗ ОТ ОТГОВОРНОСТ:</span></strong>
+                    <span class="lang-en">This website is for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation for any security or investment advisory service.</span>
+                    <span class="lang-bg">Този уебсайт е само с информационна цел и не представлява предложение за продажба, приканване за покупка или препоръка за ценни книжа или консултантски услуги.</span></p>
+                <p>
+                    <span class="lang-en">PAST PERFORMANCE IS NOT INDICATIVE OF FUTURE RESULTS. All historical performance shown on this site (charts, tables, and the simulator) is <strong>hypothetical, backtested</strong> data covering 2005–2025 and represents <strong>gross returns</strong> net of modelled transaction/borrow costs but before advisory fees and taxes. Backtested performance has inherent limitations: it is constructed with the benefit of hindsight, does not represent actual trading, and no representation is made that any account will achieve similar results. The live track record is reported separately from inception on the internal dashboard.</span>
+                    <span class="lang-bg">МИНАЛИТЕ РЕЗУЛТАТИ НЕ СА ПОКАЗАТЕЛНИ ЗА БЪДЕЩИ. Цялото историческо представяне на този сайт е <strong>хипотетични, бектествани</strong> данни за 2005–2025 и представлява <strong>бруто възвръщаемост</strong> нето от моделирани разходи, но преди такси и данъци. Бектестовете имат присъщи ограничения и не представляват реална търговия. Реалният резултат се отчита отделно от старта на вътрешното табло.</span></p>
+                <p>&copy; 2026 Sredna Capital Management. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#6B7280';
+
+        // ---- LANGUAGE & PAGE ----
+        let currentLang = 'en';
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.body.className = lang === 'en' ? 'show-en' : 'show-bg';
+            document.getElementById('btn-en').className = lang === 'en' ? "px-3 py-1.5 transition bg-sredna text-white" : "px-3 py-1.5 transition bg-white text-gray-600 hover:bg-gray-50";
+            document.getElementById('btn-bg').className = lang === 'bg' ? "px-3 py-1.5 transition bg-sredna text-white" : "px-3 py-1.5 transition bg-white text-gray-600 hover:bg-gray-50";
+            updateCharts();
+        }
+        function switchPage(page) {
+            const isHome = page === 'home';
+            document.getElementById('main-content').classList.toggle('hidden', !isHome);
+            document.getElementById('documents-content').classList.toggle('hidden', isHome);
+            document.getElementById('nav-home').classList.toggle('active', isHome);
+            document.getElementById('nav-docs').classList.toggle('active', !isHome);
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+
+        // ---- FORM (AJAX) ----
+        const form = document.getElementById('accessForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Sending..."; btn.disabled = true;
+            fetch("https://formsubmit.co/ajax/info@srednacapital.com", { method:"POST", body:new FormData(form) })
+                .then(r => r.json())
+                .then(() => { form.style.display='none'; document.getElementById('successMessage').classList.remove('hidden'); })
+                .catch(() => { btn.innerText = "Error. Try again."; btn.disabled = false; });
+        });
+
+        // ---- REAL DATA (validated tradeable config: US ETFs, 1x engine, QLD boost, cash park; net of modelled costs) ----
+        const annualReturns = [
+            {year:2005,s:0.084,b:0.048,sdd:-3.5,bdd:-7.0},{year:2006,s:0.146,b:0.158,sdd:-8.5,bdd:-7.6},
+            {year:2007,s:0.183,b:0.051,sdd:-4.8,bdd:-9.9},{year:2008,s:-0.028,b:-0.368,sdd:-18.6,bdd:-47.1},
+            {year:2009,s:0.219,b:0.264,sdd:-6.6,bdd:-27.1},{year:2010,s:0.230,b:0.151,sdd:-4.7,bdd:-15.7},
+            {year:2011,s:0.236,b:0.019,sdd:-5.0,bdd:-18.6},{year:2012,s:0.140,b:0.160,sdd:-5.2,bdd:-9.7},
+            {year:2013,s:0.060,b:0.323,sdd:-7.2,bdd:-5.5},{year:2014,s:0.117,b:0.135,sdd:-3.9,bdd:-7.3},
+            {year:2015,s:0.020,b:0.012,sdd:-5.0,bdd:-11.9},{year:2016,s:0.070,b:0.120,sdd:-9.0,bdd:-9.2},
+            {year:2017,s:0.286,b:0.217,sdd:-3.5,bdd:-2.6},{year:2018,s:0.040,b:-0.046,sdd:-7.2,bdd:-19.4},
+            {year:2019,s:0.313,b:0.312,sdd:-5.0,bdd:-6.6},{year:2020,s:0.448,b:0.183,sdd:-11.1,bdd:-33.7},
+            {year:2021,s:0.061,b:0.287,sdd:-10.1,bdd:-5.1},{year:2022,s:-0.146,b:-0.182,sdd:-21.2,bdd:-24.5},
+            {year:2023,s:0.318,b:0.262,sdd:-9.8,bdd:-10.0},{year:2024,s:0.184,b:0.249,sdd:-4.2,bdd:-8.4},
+            {year:2025,s:0.429,b:0.177,sdd:-7.8,bdd:-18.8}
+        ];
+
+        // Drawdown table
+        (function(){
+            let rows='';
+            annualReturns.forEach(d=>{ rows += `<tr><td class="text-left pl-4 font-sans text-gray-600">${d.year}</td><td class="text-right text-gray-600">${d.sdd.toFixed(2)}%</td><td class="text-right pr-4 text-gray-600">${d.bdd.toFixed(2)}%</td></tr>`; });
+            const avgS=(annualReturns.reduce((a,d)=>a+d.sdd,0)/annualReturns.length).toFixed(2);
+            const avgB=(annualReturns.reduce((a,d)=>a+d.bdd,0)/annualReturns.length).toFixed(2);
+            rows += `<tr class="bg-sredna-accent/30 font-bold"><td class="text-left pl-4 font-sans"><span class="lang-en">AVERAGE</span><span class="lang-bg">СРЕДНО</span></td><td class="text-right text-gray-600">${avgS}%</td><td class="text-right pr-4 text-gray-600">${avgB}%</td></tr>`;
+            document.getElementById('ddTableBody').innerHTML = rows;
+        })();
+
+        // Monthly compounding series for the simulator
+        function monthlySeries(){
+            const out=[]; annualReturns.forEach(r=>{ for(let m=0;m<12;m++){ out.push({year:r.year, mS:Math.pow(1+r.s,1/12)-1, mB:Math.pow(1+r.b,1/12)-1, label:`${r.year}-${String(m+1).padStart(2,'0')}`}); } }); return out;
+        }
+        const MSERIES = monthlySeries();
+
+        // ---- CHARTS ----
+        const ctxWealth = document.getElementById('wealthChart').getContext('2d');
+        let grad = ctxWealth.createLinearGradient(0,0,0,400); grad.addColorStop(0,'rgba(0,66,37,0.15)'); grad.addColorStop(1,'rgba(0,66,37,0.0)');
+        const wealthChart = new Chart(ctxWealth, { type:'line', data:{ labels:[], datasets:[
+            { label:"Sredna Capital (Backtest)", data:[], borderColor:'#004225', backgroundColor:grad, fill:true, borderWidth:2.5, pointRadius:0, pointHoverRadius:6, tension:0.2 },
+            { label:'S&P 500 (Backtest)', data:[], borderColor:'#36454F', borderWidth:2, borderDash:[4,4], pointRadius:0, pointHoverRadius:6, tension:0.2 } ] },
+            options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+                plugins:{ legend:{position:'top',align:'end',labels:{boxWidth:12,usePointStyle:true}},
+                    tooltip:{backgroundColor:'rgba(255,255,255,0.98)',titleColor:'#36454F',bodyColor:'#36454F',borderColor:'#E5E7EB',borderWidth:1,padding:12,callbacks:{label:c=>(c.dataset.label||'')+': '+new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(c.parsed.y)}}},
+                scales:{ x:{grid:{display:false},ticks:{maxTicksLimit:6}}, y:{position:'right',grid:{color:'#F3F4F6'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}} } } });
+
+        const ctxBar = document.getElementById('annualPerfChart').getContext('2d');
+        const annualPerfChart = new Chart(ctxBar, { type:'bar', data:{ labels:annualReturns.map(d=>d.year), datasets:[
+            { label:"Sredna Capital", data:annualReturns.map(d=>d.s*100), backgroundColor:'#004225', barPercentage:0.6, categoryPercentage:0.8 },
+            { label:'SPY', data:annualReturns.map(d=>d.b*100), backgroundColor:'#36454F', barPercentage:0.6, categoryPercentage:0.8 } ] },
+            options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',align:'end',labels:{boxWidth:12,usePointStyle:true}},
+                tooltip:{backgroundColor:'rgba(255,255,255,0.98)',titleColor:'#36454F',bodyColor:'#36454F',borderColor:'#E5E7EB',borderWidth:1,padding:12,callbacks:{label:c=>(c.dataset.label||'')+': '+c.parsed.y.toFixed(2)+'%'}}},
+                scales:{ x:{grid:{display:false}}, y:{grid:{color:'#F3F4F6'},ticks:{callback:v=>v+'%'}} } } });
+
+        // ---- SIMULATOR ----
+        function runSimulation(){
+            const initial = parseFloat(document.getElementById('initialCapital').value)||0;
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value)||0;
+            const startYear = parseInt(document.getElementById('startYear').value);
+            document.getElementById('yearDisplay').textContent = startYear;
+            const seg = MSERIES.filter(m=>m.year>=startYear);
+            let sVal=initial, bVal=initial;
+            const labels=[], sData=[], bData=[];
+            seg.forEach((m,i)=>{ if(i>0){ sVal+=monthly; bVal+=monthly; } sVal*=(1+m.mS); bVal*=(1+m.mB); labels.push(m.label); sData.push(sVal); bData.push(bVal); });
+            wealthChart.data.labels=labels; wealthChart.data.datasets[0].data=sData; wealthChart.data.datasets[1].data=bData; wealthChart.update();
+            const fmt=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
+            document.getElementById('finalStratValue').textContent=fmt(sVal);
+            document.getElementById('finalSpyValue').textContent=fmt(bVal);
+            const yrs=seg.length/12;
+            const contrib=initial + monthly*Math.max(seg.length-1,0);
+            const cagrS = Math.pow(sVal/Math.max(contrib,1),1/yrs)-1;
+            const cagrB = Math.pow(bVal/Math.max(contrib,1),1/yrs)-1;
+            document.getElementById('cagrStrat').textContent=(cagrS*100).toFixed(1)+'%';
+            document.getElementById('cagrSpy').textContent=(cagrB*100).toFixed(1)+'%';
+        }
+        function updateCharts(){
+            wealthChart.data.datasets[0].label = currentLang==='en' ? "Sredna Capital (Backtest)" : "Sredna Capital (Бектест)";
+            wealthChart.data.datasets[1].label = currentLang==='en' ? "S&P 500 (Backtest)" : "S&P 500 (Бектест)";
+            annualPerfChart.data.datasets[0].label = currentLang==='en' ? "Sredna Capital" : "Sredna Capital";
+            wealthChart.update(); annualPerfChart.update();
+        }
+
+        // ---- INIT ----
+        ['initialCapital','monthlyContribution','startYear'].forEach(id=>document.getElementById(id).addEventListener('input', runSimulation));
+        setLanguage('en');
+        runSimulation();
+    </script>
+</body>
+</html>

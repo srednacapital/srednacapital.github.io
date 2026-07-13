@@ -1,0 +1,1 @@
+# srednacapital.github.io
