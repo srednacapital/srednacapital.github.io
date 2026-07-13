@@ -12,7 +12,7 @@ engine/etoro_config.json
 engine/
 build_dashboard.py
 dashboard.src.html
-update.bat
+*.bat
 README_SREDNA.md
 
 # Python cruft
