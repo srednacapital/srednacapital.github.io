@@ -19,3 +19,6 @@ README_SREDNA.md
 # Python cruft
 __pycache__/
 *.pyc
+
+# Local run log - contains live account equity. Never publish.
+update_log.txt
