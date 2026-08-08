@@ -55,11 +55,18 @@
                         <a href="#contact" class="px-4 py-2 bg-sredna text-white rounded-md hover:bg-opacity-90 transition shadow-sm"><span class="lang-en">Contact IR</span><span class="lang-bg">Връзка с нас</span></a>
                         <a href="dashboard.html" class="px-4 py-2 border border-sredna text-sredna rounded-md hover:bg-sredna hover:text-white transition"><span class="lang-en">Employee Login</span><span class="lang-bg">Вход за Служители</span></a>
                     </div>
-                    <div class="flex items-center border rounded-md overflow-hidden text-xs font-bold">
+                    <div class="flex items-center border rounded-md overflow-hidden text-xs font-bold shrink-0">
                         <button onclick="setLanguage('en')" class="px-3 py-1.5 transition bg-sredna text-white" id="btn-en">EN</button>
                         <button onclick="setLanguage('bg')" class="px-3 py-1.5 transition bg-white text-gray-600 hover:bg-gray-50" id="btn-bg">BG</button>
                     </div>
                 </div>
+            </div>
+            <!-- mobile nav: the desktop menu is hidden below md, so phones need their own row -->
+            <div class="md:hidden flex items-center justify-between gap-2 pb-3 -mt-2 text-xs font-medium">
+                <button onclick="switchPage('home')" class="flex-1 px-2 py-2 rounded border border-gray-200 text-gray-600 active:bg-gray-50" id="m-nav-home"><span class="lang-en">Home</span><span class="lang-bg">Начало</span></button>
+                <button onclick="switchPage('documents')" class="flex-1 px-2 py-2 rounded border border-gray-200 text-gray-600 active:bg-gray-50" id="m-nav-docs"><span class="lang-en">Docs</span><span class="lang-bg">Документи</span></button>
+                <a href="#contact" class="flex-1 text-center px-2 py-2 rounded bg-sredna text-white"><span class="lang-en">Contact</span><span class="lang-bg">Контакт</span></a>
+                <a href="dashboard.html" class="flex-1 text-center px-2 py-2 rounded border border-sredna text-sredna"><span class="lang-en">Login</span><span class="lang-bg">Вход</span></a>
             </div>
         </div>
     </nav>
@@ -133,7 +140,17 @@
                 <div class="clean-card h-auto block">
                     <div class="clean-card-header"><span class="lang-en">Annual Returns &amp; Drawdown Profile</span><span class="lang-bg">Годишна Възвръщаемост и Профил на Спада</span></div>
                     <div class="clean-card-body">
-                        <div class="h-80 relative mb-10 w-full"><canvas id="annualPerfChart"></canvas></div>
+                        <!-- legend: identity is never colour-alone -->
+                        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-4 text-xs font-medium">
+                            <span class="inline-flex items-center gap-2"><span style="width:14px;height:14px;border-radius:3px;background:#008300;display:inline-block"></span>Sredna Capital</span>
+                            <span class="inline-flex items-center gap-2"><span style="width:14px;height:14px;border-radius:3px;background:#4a3aa7;display:inline-block"></span>S&amp;P 500 (SPY)</span>
+                            <span class="text-gray-400 hidden sm:inline">&middot; hover a bar for exact values</span>
+                            <span class="text-gray-400 sm:hidden">&middot; swipe chart sideways &rarr;</span>
+                        </div>
+                        <!-- 21 year-pairs need horizontal room on a phone: scroll rather than squash -->
+                        <div class="overflow-x-auto -mx-2 px-2 mb-10">
+                            <div class="h-80 relative" style="min-width:760px"><canvas id="annualPerfChart"></canvas></div>
+                        </div>
                         <h4 class="text-xs font-bold text-sredna-slate uppercase tracking-wider mb-4 border-b pb-2"><span class="lang-en">Max Drawdown by Year</span><span class="lang-bg">Максимален Спад по Година</span></h4>
                         <div class="overflow-x-auto border rounded-lg">
                             <table class="perf-table min-w-full">
@@ -148,7 +165,7 @@
                     <div class="clean-card">
                         <div class="clean-card-header"><span class="lang-en">Risk &amp; Return Profile</span><span class="lang-bg">Профил Риск/Възвръщаемост</span></div>
                         <div class="clean-card-body">
-                            <table class="w-full text-sm metric-table">
+                            <div class="overflow-x-auto"><table class="w-full text-sm metric-table min-w-[320px]">
                                 <thead><tr class="text-[10px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-50"><th class="text-left py-2 font-normal pb-3"><span class="lang-en">Metric</span><span class="lang-bg">Показател</span></th><th class="text-left py-2 pb-3">Sredna</th><th class="text-left py-2 pb-3">SPY</th></tr></thead>
                                 <tbody>
                                     <tr><td class="metric-label">CAGR</td><td class="metric-value text-gray-600">17.73%</td><td class="metric-value text-gray-600">10.89%</td></tr>
@@ -160,13 +177,13 @@
                                     <tr><td class="metric-label">Beta</td><td class="metric-value text-gray-600">0.37</td><td class="metric-value text-gray-600">1.00</td></tr>
                                     <tr class="bg-sredna-accent/30"><td class="metric-label font-bold text-sredna-slate pl-2"><span class="lang-en">Annualized Alpha <span class="text-xs font-normal text-gray-500">(vs S&amp;P 500)</span></span><span class="lang-bg">Годишна Алфа <span class="text-xs font-normal text-gray-500">(спрямо S&amp;P 500)</span></span></td><td class="metric-value text-gray-600 pr-2">+11.9%</td><td class="metric-value text-gray-600 pr-2">0.00%</td></tr><tr><td class="metric-label pl-2"><span class="lang-en">Alpha, multi-factor <span class="text-xs text-gray-400">(vs SPY/QQQ/GLD/TLT)</span></span><span class="lang-bg">Алфа, многофакторна <span class="text-xs text-gray-400">(спрямо SPY/QQQ/GLD/TLT)</span></span></td><td class="metric-value text-gray-600 pr-2">+6.5%</td><td class="metric-value text-gray-600 pr-2">0.00%</td></tr>
                                 </tbody>
-                            </table>
+                            </table></div>
                         </div>
                     </div>
                     <div class="clean-card">
                         <div class="clean-card-header"><span class="lang-en">Backtest Highlights</span><span class="lang-bg">Акценти от Бектеста</span></div>
                         <div class="clean-card-body">
-                             <table class="w-full text-sm metric-table">
+                             <div class="overflow-x-auto"><table class="w-full text-sm metric-table min-w-[320px]">
                                 <tbody>
                                     <tr><td class="metric-label"><span class="lang-en">Positive Years</span><span class="lang-bg">Положителни Години</span></td><td class="metric-value text-gray-600 text-right">19 / 21 (90%)</td></tr>
                                     <tr><td class="metric-label"><span class="lang-en">Best Year (2020)</span><span class="lang-bg">Най-добра Година (2020)</span></td><td class="metric-value text-gray-600 text-right">+60.8%</td></tr>
@@ -176,7 +193,7 @@
                                     <tr><td class="metric-label"><span class="lang-en">2020 COVID Crash (MaxDD)</span><span class="lang-bg">COVID Срив 2020 (MaxDD)</span></td><td class="metric-value text-gray-600 text-right">-10.1% <span class="text-xs">(vs SPY -33.7%)</span></td></tr>
                                     <tr><td class="metric-label"><span class="lang-en">Correlation to S&amp;P 500</span><span class="lang-bg">Корелация с S&amp;P 500</span></td><td class="metric-value text-gray-600 text-right">Low (β 0.37)</td></tr>
                                 </tbody>
-                             </table>
+                             </table></div>
                         </div>
                     </div>
                 </div>
@@ -348,13 +365,43 @@
                     tooltip:{backgroundColor:'rgba(255,255,255,0.98)',titleColor:'#36454F',bodyColor:'#36454F',borderColor:'#E5E7EB',borderWidth:1,padding:12,callbacks:{label:c=>(c.dataset.label||'')+': '+new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(c.parsed.y)}}},
                 scales:{ x:{grid:{display:false},ticks:{maxTicksLimit:6}}, y:{position:'right',grid:{color:'#F3F4F6'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k'}} } } });
 
+        // Palette validated with the dataviz six-checks validator (light, surface #fff):
+        //   #008300 (Sredna) vs #4a3aa7 (SPY) -> ALL CHECKS PASS
+        //   normal-vision dE 34.1 | deutan 27.9 | tritan 13.1 | both >=3:1 contrast
+        // The previous pair (#004225/#36454F) FAILED: normal-vision dE only 9.3, i.e.
+        // hard to tell apart even with full colour vision -- which is what was wrong.
+        const C_STRAT='#008300', C_BENCH='#4a3aa7';
+        // zero baseline drawn darker than the gridlines so +/- reads instantly
+        const zeroLine = { id:'zeroLine', afterDatasetsDraw(c){
+            const y=c.scales.y.getPixelForValue(0), a=c.chartArea, x=c.ctx;
+            x.save(); x.strokeStyle='#9CA3AF'; x.lineWidth=1.5; x.beginPath();
+            x.moveTo(a.left,y); x.lineTo(a.right,y); x.stroke(); x.restore(); } };
         const ctxBar = document.getElementById('annualPerfChart').getContext('2d');
-        const annualPerfChart = new Chart(ctxBar, { type:'bar', data:{ labels:annualReturns.map(d=>d.year), datasets:[
-            { label:"Sredna Capital", data:annualReturns.map(d=>d.s*100), backgroundColor:'#004225', barPercentage:0.6, categoryPercentage:0.8 },
-            { label:'SPY', data:annualReturns.map(d=>d.b*100), backgroundColor:'#36454F', barPercentage:0.6, categoryPercentage:0.8 } ] },
-            options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',align:'end',labels:{boxWidth:12,usePointStyle:true}},
-                tooltip:{backgroundColor:'rgba(255,255,255,0.98)',titleColor:'#36454F',bodyColor:'#36454F',borderColor:'#E5E7EB',borderWidth:1,padding:12,callbacks:{label:c=>(c.dataset.label||'')+': '+c.parsed.y.toFixed(2)+'%'}}},
-                scales:{ x:{grid:{display:false}}, y:{grid:{color:'#F3F4F6'},ticks:{callback:v=>v+'%'}} } } });
+        const annualPerfChart = new Chart(ctxBar, { type:'bar', plugins:[zeroLine],
+            data:{ labels:annualReturns.map(d=>d.year), datasets:[
+              { label:"Sredna Capital", data:annualReturns.map(d=>d.s*100), backgroundColor:C_STRAT,
+                borderRadius:4, borderSkipped:false, barPercentage:0.82, categoryPercentage:0.74 },
+              { label:'S&P 500 (SPY)', data:annualReturns.map(d=>d.b*100), backgroundColor:C_BENCH,
+                borderRadius:4, borderSkipped:false, barPercentage:0.82, categoryPercentage:0.74 } ] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                interaction:{mode:'index',intersect:false},
+                plugins:{
+                    legend:{display:false},              // custom legend in the markup above
+                    tooltip:{backgroundColor:'#fff',titleColor:'#36454F',bodyColor:'#36454F',
+                        borderColor:'#E5E7EB',borderWidth:1,padding:12,usePointStyle:true,
+                        titleFont:{weight:'700'},
+                        callbacks:{
+                            label:c=>' '+(c.dataset.label||'')+':  '+(c.parsed.y>=0?'+':'')+c.parsed.y.toFixed(1)+'%',
+                            afterBody:items=>{
+                                if(items.length<2) return '';
+                                const d=items[0].parsed.y-items[1].parsed.y;
+                                return '\n'+(d>=0?'Outperformed by +':'Underperformed by ')+d.toFixed(1)+' pp';
+                            } } } },
+                scales:{
+                    x:{ grid:{display:false}, ticks:{font:{size:11},maxRotation:0,autoSkip:false},
+                        border:{display:false} },
+                    y:{ grid:{color:'#EFEFEC'}, border:{display:false},
+                        ticks:{callback:v=>(v>0?'+':'')+v+'%', font:{size:11}} } } } });
 
         // ---- SIMULATOR ----
         function runSimulation(){
@@ -380,7 +427,7 @@
         function updateCharts(){
             wealthChart.data.datasets[0].label = currentLang==='en' ? "Sredna Capital (Backtest)" : "Sredna Capital (Бектест)";
             wealthChart.data.datasets[1].label = currentLang==='en' ? "S&P 500 (Backtest)" : "S&P 500 (Бектест)";
-            annualPerfChart.data.datasets[0].label = currentLang==='en' ? "Sredna Capital" : "Sredna Capital";
+            
             wealthChart.update(); annualPerfChart.update();
         }
 
