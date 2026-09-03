@@ -1,0 +1,631 @@
+{
+  "meta": {
+    "inception": "2026-07-13",
+    "base_value": 836.47,
+    "currency": "USD",
+    "benchmark": "SPY",
+    "last_updated": "2026-09-02",
+    "strategy": "Sredna Core Engine (S6): regime-rotation + gated 2x equity boost",
+    "note": "Live track record from inception. Auto-updated each weekday by GitHub Actions (engine/signal_export.py).",
+    "tracking": "live",
+    "bond_sleeve_migrated": true
+  },
+  "signal": {
+    "date": "2026-09-02",
+    "engine_state": "ACTIVE",
+    "engine_holding": "EWZ",
+    "equity_leg": "QLD",
+    "park": "-",
+    "mode_short": "GROWTH",
+    "mode_desc": "Market is healthy and trending - you hold a momentum asset plus the 2x Nasdaq leg (QLD). Leverage is ON.",
+    "headline": "Growth mode - hold EWZ and the QLD boost.",
+    "cta": "No action needed - hold your current positions.",
+    "summary": "No change since the previous session. Hold your current book (EWZ 30%, QLD 30%, GLD 20%, TLT 10%, IEF 10%). Nothing to execute today.",
+    "changed": false,
+    "actions": [],
+    "book_before": [
+      {
+        "ticker": "EWZ",
+        "name": "Brazil",
+        "weight": 0.3
+      },
+      {
+        "ticker": "QLD",
+        "name": "2x Nasdaq-100",
+        "weight": 0.3
+      },
+      {
+        "ticker": "GLD",
+        "name": "Gold",
+        "weight": 0.2
+      },
+      {
+        "ticker": "TLT",
+        "name": "20y+ Treasuries",
+        "weight": 0.1
+      },
+      {
+        "ticker": "IEF",
+        "name": "7-10y Treasuries",
+        "weight": 0.1
+      }
+    ],
+    "book_after": [
+      {
+        "ticker": "EWZ",
+        "name": "Brazil",
+        "weight": 0.3
+      },
+      {
+        "ticker": "QLD",
+        "name": "2x Nasdaq-100",
+        "weight": 0.3
+      },
+      {
+        "ticker": "GLD",
+        "name": "Gold",
+        "weight": 0.2
+      },
+      {
+        "ticker": "TLT",
+        "name": "20y+ Treasuries",
+        "weight": 0.1
+      },
+      {
+        "ticker": "IEF",
+        "name": "7-10y Treasuries",
+        "weight": 0.1
+      }
+    ]
+  },
+  "positions": [
+    {
+      "ticker": "EWZ",
+      "name": "Brazil",
+      "sleeve": "Engine (rotation)",
+      "target_weight": 0.3
+    },
+    {
+      "ticker": "QLD",
+      "name": "2x Nasdaq-100",
+      "sleeve": "Equity boost",
+      "target_weight": 0.3
+    },
+    {
+      "ticker": "GLD",
+      "name": "Gold",
+      "sleeve": "Diversifier",
+      "target_weight": 0.2
+    },
+    {
+      "ticker": "TLT",
+      "name": "20y+ Treasuries",
+      "sleeve": "Diversifier (bond)",
+      "target_weight": 0.1
+    },
+    {
+      "ticker": "IEF",
+      "name": "7-10y Treasuries",
+      "sleeve": "Diversifier (bond)",
+      "target_weight": 0.1
+    }
+  ],
+  "nav": [
+    {
+      "date": "2026-07-13",
+      "value": 836.47,
+      "spy": 836.47
+    },
+    {
+      "date": "2026-07-14",
+      "value": 828.71,
+      "spy": 833.01
+    },
+    {
+      "date": "2026-07-15",
+      "value": 828.75,
+      "spy": 836.31
+    },
+    {
+      "date": "2026-07-16",
+      "value": 815.78,
+      "spy": 831.78
+    },
+    {
+      "date": "2026-07-17",
+      "value": 807.95,
+      "spy": 823.55
+    },
+    {
+      "date": "2026-07-20",
+      "value": 805.66,
+      "spy": 822.22
+    },
+    {
+      "date": "2026-07-21",
+      "value": 816.33,
+      "spy": 829.08
+    },
+    {
+      "date": "2026-07-22",
+      "value": 817.84,
+      "spy": 828.12
+    },
+    {
+      "date": "2026-07-23",
+      "value": 806.8,
+      "spy": 817.89
+    },
+    {
+      "date": "2026-07-24",
+      "value": 804.72,
+      "spy": 818.72
+    },
+    {
+      "date": "2026-07-27",
+      "value": 806.81,
+      "spy": 818.9
+    },
+    {
+      "date": "2026-07-28",
+      "value": 802.14,
+      "spy": 820.86
+    },
+    {
+      "date": "2026-07-29",
+      "value": 795.87,
+      "spy": 808.23
+    },
+    {
+      "date": "2026-07-30",
+      "value": 807.65,
+      "spy": 821.78
+    },
+    {
+      "date": "2026-07-31",
+      "value": 804.49,
+      "spy": 827.69
+    },
+    {
+      "date": "2026-08-03",
+      "value": 812.44,
+      "spy": 839.48
+    },
+    {
+      "date": "2026-08-04",
+      "value": 835.34,
+      "spy": 854.62
+    },
+    {
+      "date": "2026-08-05",
+      "value": 837.49,
+      "spy": 852.91
+    },
+    {
+      "date": "2026-08-06",
+      "value": 834.44,
+      "spy": 851.55
+    },
+    {
+      "date": "2026-08-07",
+      "value": 845.96,
+      "spy": 856.76
+    },
+    {
+      "date": "2026-08-10",
+      "value": 844.93,
+      "spy": 856.5
+    },
+    {
+      "date": "2026-08-11",
+      "value": 841.89,
+      "spy": 853.77
+    },
+    {
+      "date": "2026-08-12",
+      "value": 847.9,
+      "spy": 855.9
+    },
+    {
+      "date": "2026-08-13",
+      "value": 853.8,
+      "spy": 861.88
+    },
+    {
+      "date": "2026-08-14",
+      "value": 852.81,
+      "spy": 860.17
+    },
+    {
+      "date": "2026-08-17",
+      "value": 851.56,
+      "spy": 856.1
+    },
+    {
+      "date": "2026-08-18",
+      "value": 842.71,
+      "spy": 850.32
+    },
+    {
+      "date": "2026-08-19",
+      "value": 854.63,
+      "spy": 852.1
+    },
+    {
+      "date": "2026-08-20",
+      "value": 849.35,
+      "spy": 844.95
+    },
+    {
+      "date": "2026-08-21",
+      "value": 857.83,
+      "spy": 848.4
+    },
+    {
+      "date": "2026-08-24",
+      "value": 856.3,
+      "spy": 845.91
+    },
+    {
+      "date": "2026-08-25",
+      "value": 862.08,
+      "spy": 848.61
+    },
+    {
+      "date": "2026-08-26",
+      "value": 856.14,
+      "spy": 848.8
+    },
+    {
+      "date": "2026-08-27",
+      "value": 864.1,
+      "spy": 854.36
+    },
+    {
+      "date": "2026-08-28",
+      "value": 847.76,
+      "spy": 852.42
+    },
+    {
+      "date": "2026-08-31",
+      "value": 847.06,
+      "spy": 849.88
+    },
+    {
+      "date": "2026-09-01",
+      "value": 834.87,
+      "spy": 844.04
+    },
+    {
+      "date": "2026-09-02",
+      "value": 837.2,
+      "spy": 848.04
+    }
+  ],
+  "trades": [
+    {
+      "id": 1,
+      "date": "2026-07-14",
+      "action": "BUY",
+      "ticker": "XLK",
+      "sleeve": "Engine (rotation)",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine ACTIVE",
+      "note": "Inception allocation - engine rotated into US Technology."
+    },
+    {
+      "id": 2,
+      "date": "2026-07-14",
+      "action": "BUY",
+      "ticker": "QLD",
+      "sleeve": "Equity boost",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine ACTIVE",
+      "note": "Inception allocation - 2x Nasdaq leg active (engine risk-on)."
+    },
+    {
+      "id": 3,
+      "date": "2026-07-14",
+      "action": "BUY",
+      "ticker": "GLD",
+      "sleeve": "Diversifier",
+      "weight": 0.2,
+      "price": null,
+      "shares": null,
+      "state": "-",
+      "note": "Inception allocation - gold diversifier."
+    },
+    {
+      "id": 4,
+      "date": "2026-07-14",
+      "action": "BUY",
+      "ticker": "TLT",
+      "sleeve": "Diversifier",
+      "weight": 0.2,
+      "price": null,
+      "shares": null,
+      "state": "-",
+      "note": "Inception allocation - long-Treasury diversifier."
+    },
+    {
+      "id": 5,
+      "date": "2026-07-10",
+      "action": "REBALANCE",
+      "ticker": "CASH-PARK",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine CASH",
+      "note": "Auto-logged: engine moved to CASH, sleeve parked, equity leg QQQ."
+    },
+    {
+      "id": 6,
+      "date": "2026-07-20",
+      "action": "REBALANCE",
+      "ticker": "TLT/IEF-BLEND",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine CASH",
+      "note": "One-time portfolio upgrade: bond sleeve split 50/50 TLT/IEF (was 100% TLT) for better resilience to rate-shock scenarios (e.g. 2022) alongside classic crash protection. TRIM TLT (20y+ Treasuries) - reduce to 15%. BUY IEF (7-10y Treasuries) - open to 15%."
+    },
+    {
+      "id": 7,
+      "date": "2026-08-17",
+      "action": "REBALANCE",
+      "ticker": "EWY",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine ACTIVE",
+      "note": "Auto-logged: engine moved to ACTIVE, holding EWY, equity leg QLD."
+    },
+    {
+      "id": 8,
+      "date": "2026-08-19",
+      "action": "REBALANCE",
+      "ticker": "CASH-PARK",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine CASH",
+      "note": "Auto-logged: engine moved to CASH, sleeve parked, equity leg QQQ."
+    },
+    {
+      "id": 9,
+      "date": "2026-08-20",
+      "action": "REBALANCE",
+      "ticker": "GLD",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine ACTIVE",
+      "note": "Auto-logged: engine moved to ACTIVE, holding GLD, equity leg QLD."
+    },
+    {
+      "id": 10,
+      "date": "2026-09-01",
+      "action": "REBALANCE",
+      "ticker": "CASH-PARK",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine CASH",
+      "note": "Auto-logged: engine moved to CASH, sleeve parked, equity leg QQQ."
+    },
+    {
+      "id": 11,
+      "date": "2026-09-02",
+      "action": "REBALANCE",
+      "ticker": "EWZ",
+      "sleeve": "Engine",
+      "weight": 0.3,
+      "price": null,
+      "shares": null,
+      "state": "engine ACTIVE",
+      "note": "Auto-logged: engine moved to ACTIVE, holding EWZ, equity leg QLD."
+    }
+  ],
+  "nav_real": [
+    {
+      "date": "2026-07-13",
+      "value": 836.47,
+      "spy": 749.17
+    },
+    {
+      "date": "2026-07-14",
+      "value": 843.12,
+      "spy": 751.86
+    },
+    {
+      "date": "2026-07-15",
+      "value": 838.81,
+      "spy": 754.81
+    },
+    {
+      "date": "2026-07-16",
+      "value": 833.46,
+      "spy": 750.77
+    },
+    {
+      "date": "2026-07-17",
+      "value": 833.13,
+      "spy": 743.29
+    },
+    {
+      "date": "2026-07-20",
+      "value": 837.3,
+      "spy": 742.09
+    },
+    {
+      "date": "2026-07-21",
+      "value": 839.5,
+      "spy": 748.32
+    },
+    {
+      "date": "2026-07-22",
+      "value": 841.79,
+      "spy": 748.47
+    },
+    {
+      "date": "2026-07-23",
+      "value": 828.8,
+      "spy": 736.95
+    },
+    {
+      "date": "2026-07-24",
+      "value": 827.51,
+      "spy": 738.89
+    },
+    {
+      "date": "2026-07-27",
+      "value": 830.63,
+      "spy": 739.35
+    },
+    {
+      "date": "2026-07-28",
+      "value": 828.0,
+      "spy": 742.61
+    },
+    {
+      "date": "2026-07-29",
+      "value": 827.42,
+      "spy": 735.83
+    },
+    {
+      "date": "2026-07-30",
+      "value": 829.5,
+      "spy": 741.69
+    },
+    {
+      "date": "2026-07-31",
+      "value": 825.92,
+      "spy": 747.03
+    },
+    {
+      "date": "2026-08-03",
+      "value": 831.1,
+      "spy": 758.1
+    },
+    {
+      "date": "2026-08-04",
+      "value": 842.49,
+      "spy": 772.05
+    },
+    {
+      "date": "2026-08-05",
+      "value": 850.82,
+      "spy": 769.79
+    },
+    {
+      "date": "2026-08-06",
+      "value": 849.09,
+      "spy": 768.21
+    },
+    {
+      "date": "2026-08-07",
+      "value": 859.67,
+      "spy": 773.26
+    },
+    {
+      "date": "2026-08-10",
+      "value": 860.43,
+      "spy": 773.12
+    },
+    {
+      "date": "2026-08-11",
+      "value": 857.75,
+      "spy": 770.85
+    },
+    {
+      "date": "2026-08-12",
+      "value": 862.08,
+      "spy": 772.96
+    },
+    {
+      "date": "2026-08-13",
+      "value": 862.48,
+      "spy": 777.7
+    },
+    {
+      "date": "2026-08-14",
+      "value": 862.0,
+      "spy": 776.15
+    },
+    {
+      "date": "2026-08-17",
+      "value": 863.06,
+      "spy": 773.28
+    },
+    {
+      "date": "2026-08-18",
+      "value": 829.52,
+      "spy": 767.45
+    },
+    {
+      "date": "2026-08-19",
+      "value": 842.69,
+      "spy": 769.06
+    },
+    {
+      "date": "2026-08-20",
+      "value": 844.8,
+      "spy": 763.12
+    },
+    {
+      "date": "2026-08-21",
+      "value": 849.49,
+      "spy": 766.66
+    },
+    {
+      "date": "2026-08-24",
+      "value": 848.17,
+      "spy": 763.77
+    },
+    {
+      "date": "2026-08-25",
+      "value": 852.17,
+      "spy": 765.44
+    },
+    {
+      "date": "2026-08-26",
+      "value": 846.75,
+      "spy": 766.08
+    },
+    {
+      "date": "2026-08-27",
+      "value": 853.66,
+      "spy": 770.8
+    },
+    {
+      "date": "2026-08-28",
+      "value": 836.64,
+      "spy": 769.66
+    },
+    {
+      "date": "2026-08-31",
+      "value": 834.37,
+      "spy": 766.65
+    },
+    {
+      "date": "2026-09-01",
+      "value": 815.2,
+      "spy": 761.41
+    },
+    {
+      "date": "2026-09-02",
+      "value": 819.07,
+      "spy": 765.4
+    }
+  ]
+}
